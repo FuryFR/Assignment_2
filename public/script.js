@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
       fetch(`/api/endpoint?arg=${argument}`)
           .then((response) => response.json())
           .then((data) => {
-              // Display the response in the resultDiv
               resultDiv.textContent = JSON.stringify(data);
           })
           .catch((error) => {

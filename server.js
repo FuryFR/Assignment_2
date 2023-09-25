@@ -2,10 +2,10 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Serve static files from a "public" directory
+
 app.use(express.static('public'));
 
-// Dynamic endpoint to handle AJAX requests
+
 app.get('/api/endpoint', (req, res) => {
     const argument = req.query.arg;
     const responseData = generateResponse(argument);
@@ -13,7 +13,6 @@ app.get('/api/endpoint', (req, res) => {
 });
 
 function generateResponse(argument) {
-    // You can customize the response based on the argument
     let response = {};
 
     if (argument === 'data1') {
