@@ -1,26 +1,25 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const fetchDataBtn = document.getElementById('fetchDataBtn');
-    const fetchDataBtn2 = document.getElementById('fetchDataBtn2');
-    const resultDiv = document.getElementById('result');
-  
-    fetchDataBtn.addEventListener('click', () => {
-      fetchData('value1');
-    });
-  
-    fetchDataBtn2.addEventListener('click', () => {
-      fetchData('value2');
-    });
-  
-    function fetchData(param) {
-      fetch(`/api/data?param=${param}`)
-        .then((response) => response.json())
-        .then((data) => {
-          // Display the response in the resultDiv
-          resultDiv.textContent = JSON.stringify(data, null, 2);
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-    }
+  const button1 = document.getElementById('button1');
+  const button2 = document.getElementById('button2');
+  const resultDiv = document.getElementById('result');
+
+  button1.addEventListener('click', () => {
+      fetchData('data1');
   });
-   
+
+  button2.addEventListener('click', () => {
+      fetchData('data2');
+  });
+
+  function fetchData(argument) {
+      fetch(`/api/endpoint?arg=${argument}`)
+          .then((response) => response.json())
+          .then((data) => {
+              // Display the response in the resultDiv
+              resultDiv.textContent = JSON.stringify(data);
+          })
+          .catch((error) => {
+              console.error('Error:', error);
+          });
+  }
+});

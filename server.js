@@ -1,45 +1,32 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000; // You can choose any port you prefer
+const port = process.env.PORT || 3000;
 
-// Serve static files using Express.static middleware
+// Serve static files from a "public" directory
 app.use(express.static('public'));
 
-// Create a static endpoint for the root path "/"
-app.get('/', (req, res) => {
-  // Return your index.html file
-  res.sendFile(__dirname + '/public/index.html');
-});
-
-// Start the Express server
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
- 
-
 // Dynamic endpoint to handle AJAX requests
-app.get('/api/data', (req, res) => {
-    // Extract query parameters or URL parameters as needed
-    const param = req.query.param;
-  
-    // Use a separate function to generate a JSON response based on the parameter
-    const responseData = generateResponse(param);
-  
-    // Send the JSON response
+app.get('/api/endpoint', (req, res) => {
+    const argument = req.query.arg;
+    const responseData = generateResponse(argument);
     res.json(responseData);
-  });
-  
-  // Separate function for generating dynamic response
-  function generateResponse(param) {
-    // Use the parameter to modify the response data
-    const response = {
-      message: `Response for param: ${param}`,
-      // Add more properties as needed
-    };
+});
+
+function generateResponse(argument) {
+    // You can customize the response based on the argument
+    let response = {};
+
+    if (argument === 'data1') {
+        response = { message: 'Response for Data 1' };
+    } else if (argument === 'data2') {
+        response = { message: 'Response for Data 2' };
+    } else {
+        response = { message: 'Invalid argument' };
+    }
+
     return response;
-  }
-  
-  module.exports = {
-    generateResponse,
-  };
-  
+}
+
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});
